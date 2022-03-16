@@ -11,7 +11,7 @@ using namespace std;
 
 DFA::DFA(fstream& fstrm) {
     //delete empty lines 
-    string line, text;
+    string line;
     int count = 0;//find the number of non-empty lines
     vector<string> lines;
     while (getline(fstrm, line) && !fstrm.eof()) {
@@ -21,11 +21,11 @@ DFA::DFA(fstream& fstrm) {
         }
     }
 
-    if (count != 5) {
+    if (count < 5) {
         throw invalid_argument("Invalid Input");
     }
 
-    else {
+   
         istringstream strm(lines[0]);
         for (int i = 0; i < 4; i++) {
             if (!strm >> inputSymbol[i]) {
@@ -51,9 +51,8 @@ DFA::DFA(fstream& fstrm) {
         }
 
         parseFunction(lines[3], 0);
-        parseFunction(lines[3], 1);
+        parseFunction(lines[4], 1);
 
-    }
 }
 
 void DFA::parseFunction(string& str, int state) {
@@ -87,7 +86,7 @@ void DFA::parseFunction(string& str, int state) {
 
 }
 
-string DFA::run(string& str) const {
+string DFA::run(string& str) {
 
     int len = str.size();
 
@@ -101,8 +100,9 @@ string DFA::run(string& str) const {
     for (int i = 1; i < len; i++) {
         curSymbol = writeSymbol[make_pair(str[0], curState)];
         answer.push_back(curSymbol);
-        curState = changeState[{str[0], 0}];
+        curState = changeState[make_pair(str[0], 0)];
     }
 
     return answer;
 }
+
