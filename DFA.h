@@ -5,20 +5,20 @@
 using namespace std;
 
 /***********************************************************************
+* 
  * Header file defines a class of Deterministic Finite Automaton
- * It recerives an input text file, which contains an information about
- *
- *
- *
- *
+ * It recerives an input text file, which contains an information about 
+ * Deterministic Finite Automaton and configures such.
+ * We can run the machine with the help of class method run(), which runs
+ * corresponding string on the machine and return the result
+ * 
  * *********************************************************************/
-
 #ifndef DFA_H
 #define DFA_H
 class DFA {
 public:
 	DFA(fstream&);
-	string run(string&)const;
+	string run(string&);
 private:
 	char inputSymbol[4]; //set of input symbols
 	char outputSymbol[2];//set of output symbols
@@ -29,3 +29,4 @@ private:
 };
 
 #endif
+
