@@ -5,7 +5,7 @@
 #include<vector>
 #include<string>
 int main(int argc, char* argv[]) {
-    if (argc >= 1) {
+    if (argc <= 1) {
         cout << "No Argument Provided" << endl;
     }
     else {
@@ -21,6 +21,8 @@ int main(int argc, char* argv[]) {
             fstrm.open(s[i]);
             if (fstrm.is_open()) {
                 DFA a(fstrm);
+                string ss = "aaaa";
+                cout << a.run(ss) << endl;;
             }
             else {
                 cerr << "Failed to read text file" << endl;
