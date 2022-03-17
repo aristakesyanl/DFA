@@ -1,3 +1,4 @@
+CC=g++
 CFLAGS=-c -Wall
 LDFLAGS=
 SOURCES=DFA.cpp Source.cpp
