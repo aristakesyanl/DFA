@@ -6,6 +6,7 @@
 #include<vector>
 #include<stdexcept>
 #include<set>
+#include<algorithm>
 #include"DFA.h"
 
 using namespace std;
