@@ -17,7 +17,7 @@ using namespace std;
 #define DFA_H
 class DFA {
 public:
-	DFA(fstream&);
+	DFA(string&);
 	string run(string&);
 private:
 	char inputSymbol[4]; //set of input symbols
