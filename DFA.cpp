@@ -13,13 +13,13 @@ using namespace std;
 
 DFA::DFA(string& fileName) {
     //delete empty lines from text file
-    ifstream in(fileName);
-    string line;
+    std::ifstream in(fileName);
+    std::string line;
     vector<string> lines;
 
     if (in.is_open()) {
         while (getline(in, line)) {
-            if (!(line.empty() || line.find_first_not_of(' ') == string::npos)) {
+            if (!(line.empty() || line.find_first_not_of(' ') == std::string::npos)) {
                 lines.push_back(line);
             }
         }
@@ -31,28 +31,42 @@ DFA::DFA(string& fileName) {
     int count = lines.size();
   
     if (count < 5) {
-        throw invalid_argument("Invalid Text Format: Not Enough Information");
+        throw std::invalid_argument("Invalid Text Format: Not Enough Information");
     }
 
     //check input symbols
+    
     lines[0].erase(remove(lines[0].begin(), lines[0].end(),' '), lines[0].end());//remove whitespaces
-    lines[0].erase(remove(lines[0].begin(), lines[0].end(), ','), lines[0].end());//remove ,
-   
-    if (lines[0].size() != 4) {
-        throw invalid_argument("failed to read input symbols");
-    }
-    else {
-        //check that all 4 charcters of string are distinct
-        set<char> s;
-        for (int i = 0; i < 4; i++) {
-            if (s.find(lines[0][i]) != s.end()) {
-                throw invalid_argument("input symbols should be distinct");
+
+    if(lines[0].size()!=1){
+        //check that the line has format a1,a2,...
+        //every second charcter should be ','
+
+        //add ',' at the end of the string to make checking easier
+        //then remove it 
+        lines[0].push_back(',');
+        for(int i=1; i<(int)lines[0].size(); i+=2){
+            if(lines[0][i]!=','){
+                throw std::invalid_argument("Invalid Input Format");
             }
         }
-        for (int i = 0; i < 4; i++) {
-            inputSymbol[i] = lines[0][i];
+    
+    }
+
+   
+    lines[0].erase(remove(lines[0].begin(), lines[0].end(), ','), lines[0].end());//remove ','
+
+    //add distinct characters to inputSymbols
+    //in the input format you can repeat symbols
+    //the format will be validated
+    std::set<char> s;
+    for (int i = 0; i < (int)lines[0].size(); i++) {
+        if (s.find(lines[0][i]) == s.end()) {
+            inputSymbol.push_back(lines[0][i]);
+            s.insert(lines[0][i]);
         }
     }
+    
  
     //check output symbols
     lines[1].erase(remove(lines[1].begin(), lines[1].end(), ' '), lines[1].end());
