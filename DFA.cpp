@@ -10,8 +10,6 @@
 #include<regex>
 #include"DFA.h"
 
-using namespace std;
-
 DFA::DFA(string& fileName) {
     //delete empty lines from text file
     std::ifstream in(fileName);
@@ -51,7 +49,7 @@ DFA::DFA(string& fileName) {
     //Check that the number of states is no less than lines
     //describing state chnages.
     //In case of additional lines just ignore them
-    //It is assumed that the first lines corresposnds
+    //It is assumed that the first lines corresponds
     //to the first state given in the state format
     //If for example first states are, q1,q2,q0
     //and input symbols are a,b,d
@@ -86,7 +84,7 @@ void DFA::parseInput(std::string str){
         }
     }
 
-    //use set to check that string contains distince characters
+    //use set to check that string contains distinct characters
     //remove repeating ones
     for(int i=0; i<(int)str.size(); i+=2){
         if(sInput.find(str[i])==sInput.end()){
@@ -113,7 +111,7 @@ void DFA::parseOutput(std::string str){
         }
     }
 
-    //use set to check that string contains distince characters
+    //use set to check that string contains distinct characters
     //remove repeating ones
     for(int i=0; i<(int)str.size(); i+=2){
         if(sOutput.find(str[i])==sOutput.end()){
@@ -146,7 +144,7 @@ void DFA::parseOutput(std::string str){
     }
 
 
-    //check the states don not conatin invalid characters
+    //check the states do not contain invalid characters
     for(int i=0; i<(int)str.size(); i++){
         if(str[i]!='q' && str[i]!=',' && (str[i]-'0'<0 || str[i]-'0'>10)){
             throw std::invalid_argument("Invalid States Format: Contains non-valid characters");
@@ -233,7 +231,7 @@ void DFA::parseFunction(string str, int state) {
         }
     }
 
-    //check that in all pairs symbols are from output
+    //check that in all pair symbols are from output
     for(int i=0; i<(int)result.size();i++){
         if(sOutput.find(result[i][0])==sOutput.end()){
             throw std::invalid_argument("Symbol Is Not Contained In Initial Output Set");
