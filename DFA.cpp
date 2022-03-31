@@ -25,6 +25,9 @@ DFA::DFA(string& fileName) {
             }
         }
     }
+    else{
+        throw std::runtime_error("Failed To Open Input Files");
+    }
 
     in.close();
 
