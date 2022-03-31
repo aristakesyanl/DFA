@@ -5,17 +5,14 @@
 #include<vector>
 #include<string>
 int main(int argc, char* argv[]) {
-    if (argc <= 1) {
-        cout << "No Argument Provided" << endl;
-    }
-    else {
-      
-        for (int i = 1; i < argc; i++) {
+    
+    for (int i = 1; i < argc; i++) {
 
-            string str(argv[i]);
-            DFA a(str);
-            string test = "abdb";
-            cout << a.run(test) << endl;;
-        }
+        std::string str(argv[i]);
+        DFA a(str);
+        std::string test;
+        std::cin>>test;
+        std::cout << a.run(test) << std::endl;;
     }
+    
 }
