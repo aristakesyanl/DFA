@@ -249,9 +249,6 @@ void DFA::parseFunction(string str, int state) {
             if(result[i][j]-'0'<0 || result[i][j]-'0'>10){
                 throw std::invalid_argument("Wrong Character Given in (symbol,state) Pair");
             }
-            if((int)result[i].size()>4 && result[i][j]=='0'){
-                throw std::invalid_argument("Wrong State Given in (symbol,state) Pair");
-            }
         }
     }
 
